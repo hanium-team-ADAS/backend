@@ -1,6 +1,6 @@
 ---
-name: "[Feature]"
-about: 작업 사항을 입력해주세요.
+name: template
+about: custom template
 title: ''
 labels: ''
 assignees: ''

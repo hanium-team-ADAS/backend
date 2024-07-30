@@ -1,0 +1,25 @@
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea/
+*.iml
+*.iws
+
+out
+gen
+
+*.class
+
+.gradle/
+build/
+target/
+
+/src/main/resources/application.yml
+
+.springBeans
+
+.DS_Store
+Thumbs.db
+
+.env

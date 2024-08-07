@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Slf4j
-@Service
+@Service("doctorAuthService") // 빈 이름을 명시적으로 지정
 @RequiredArgsConstructor
 public class AuthService {
 

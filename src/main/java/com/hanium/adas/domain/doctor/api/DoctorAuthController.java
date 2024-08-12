@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RequestMapping("/doctor")
-public class doctorAuthController {
+public class DoctorAuthController {
 
     private final AuthService authService;
 

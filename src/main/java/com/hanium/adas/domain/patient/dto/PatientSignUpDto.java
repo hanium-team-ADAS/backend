@@ -1,30 +1,33 @@
-package com.hanium.adas.domain.doctor.dto;
+package com.hanium.adas.domain.patient.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class SignUpDto {
+public class PatientSignUpDto {
     @NotNull
     private String name;
+
+    @NotNull
+    private LocalDate dateOfBirth;
+
+    @NotNull
+    private String password;
 
     @NotNull
     @Email
     private String email;
 
     @NotNull
-    private String password;
-
-    @NotNull
-    private String specialization;
-
-    @NotNull
     private String phone;
 
     @NotNull
-    private String licenseNumber;
+    private int gender;
 }
+

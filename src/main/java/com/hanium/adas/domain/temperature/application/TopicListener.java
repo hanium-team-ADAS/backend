@@ -18,10 +18,12 @@ public class TopicListener extends AWSIotTopic {
     public TopicListener(String topic, TemperatureResponseDto temperatureResponseDto) {
         super(topic);
         this.temperatureResponseDto = temperatureResponseDto;
+     
     }
 
     @Override
     public void onMessage(AWSIotMessage message) {
+
         log.info("onMessage 실행됨!!!!");
 
         try {

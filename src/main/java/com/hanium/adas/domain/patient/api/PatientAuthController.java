@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("patientAuthController")
 @RequiredArgsConstructor
 @RequestMapping("/patient")
-public class patientAuthController {
+public class PatientAuthController {
 
     //private final AuthService authService;
 

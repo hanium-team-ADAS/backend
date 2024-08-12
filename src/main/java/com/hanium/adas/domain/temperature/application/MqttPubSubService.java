@@ -10,12 +10,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class MqttPubSubService {
 
+
     @Autowired
     private AWSIotMqttClient mqttClient;
 
     // 발행, 구독을 위한 값
     static final private String subTopic = "pic";
     static final private String pubTopic = "snap";
+
 
 
     public TemperatureResponseDto snap() {
@@ -56,6 +58,7 @@ public class MqttPubSubService {
                 }
             }
 
+
         } catch (AWSIotException e) {
             throw new RuntimeException(e);
         } catch (AWSIotTimeoutException e) {
@@ -73,6 +76,8 @@ public class MqttPubSubService {
 //        }
 
         return temperatureResponseDto;
+
+
     }
 
 }

@@ -1,8 +1,8 @@
 package com.hanium.adas.domain.patient.api;
 
-import com.hanium.adas.domain.patient.application.PatientAuthService;
-import com.hanium.adas.domain.patient.dto.PatientSignInDto;
-import com.hanium.adas.domain.patient.dto.PatientSignUpDto;
+//import com.hanium.adas.domain.patient.application.AuthService;
+import com.hanium.adas.domain.patient.dto.SignUpDto;
+import com.hanium.adas.domain.patient.dto.SignInDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,17 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/patient")
 public class patientAuthController {
 
-    private final PatientAuthService patientAuthService;
+    //private final AuthService authService;
 
-    @Operation(summary = "🟡")
+    @Operation(summary = "🔺")
     @PostMapping("/sign-in")
-    public ResponseEntity<Boolean> signIn(@RequestBody PatientSignInDto patientsignInDto, HttpServletResponse response) {
-        return ResponseEntity.ok(patientAuthService.signIn(patientsignInDto));
+    public ResponseEntity<Boolean> signIn(@RequestBody SignInDto signInDto, HttpServletResponse response) {
+        return ResponseEntity.ok(true);
     }
 
-    @Operation(summary = "🟡")
+    @Operation(summary = "🔺")
     @PostMapping("/sign-up")
-    public ResponseEntity<Boolean> signUp(@RequestBody PatientSignUpDto patientSignUpDto, HttpServletResponse response) {
-        return ResponseEntity.ok(patientAuthService.signUp(patientSignUpDto));
+    public ResponseEntity<Boolean> signUp(@RequestBody SignUpDto signUpDto, HttpServletResponse response) {
+        return ResponseEntity.ok(true);
     }
 }

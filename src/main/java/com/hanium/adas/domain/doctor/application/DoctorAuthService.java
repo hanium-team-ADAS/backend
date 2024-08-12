@@ -1,7 +1,7 @@
 package com.hanium.adas.domain.doctor.application;
 
 import com.hanium.adas.domain.doctor.domain.Doctor;
-import com.hanium.adas.domain.doctor.dto.SignInDto;
+import com.hanium.adas.domain.doctor.dto.DoctorSignInDto;
 import com.hanium.adas.domain.doctor.repository.DoctorRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,11 +12,11 @@ import java.util.Optional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class DoctorAuthService {
 
     private final DoctorRepository doctorRepository;
 
-    public boolean signIn(SignInDto dto) {
+    public boolean signIn(DoctorSignInDto dto) {
 
         Optional<Doctor> doctor = doctorRepository.findAllByEmail(dto.getEmail());
 

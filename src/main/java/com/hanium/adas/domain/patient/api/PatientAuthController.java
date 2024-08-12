@@ -1,8 +1,8 @@
 package com.hanium.adas.domain.patient.api;
 
 //import com.hanium.adas.domain.patient.application.AuthService;
-import com.hanium.adas.domain.patient.dto.SignUpDto;
-import com.hanium.adas.domain.patient.dto.SignInDto;
+import com.hanium.adas.domain.patient.dto.PatientSignUpDto;
+import com.hanium.adas.domain.patient.dto.PatientSignInDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +21,13 @@ public class PatientAuthController {
 
     @Operation(summary = "🔺")
     @PostMapping("/sign-in")
-    public ResponseEntity<Boolean> signIn(@RequestBody SignInDto signInDto, HttpServletResponse response) {
+    public ResponseEntity<Boolean> signIn(@RequestBody PatientSignInDto patientSignInDto, HttpServletResponse response) {
         return ResponseEntity.ok(true);
     }
 
     @Operation(summary = "🔺")
     @PostMapping("/sign-up")
-    public ResponseEntity<Boolean> signUp(@RequestBody SignUpDto signUpDto, HttpServletResponse response) {
+    public ResponseEntity<Boolean> signUp(@RequestBody PatientSignUpDto patientSignUpDto, HttpServletResponse response) {
         return ResponseEntity.ok(true);
     }
 }

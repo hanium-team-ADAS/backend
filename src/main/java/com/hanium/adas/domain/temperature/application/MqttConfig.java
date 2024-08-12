@@ -5,8 +5,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Data
-@Configuration
 @ConfigurationProperties(prefix = "aws.iot")
+@Configuration("mqttConfigCustom")
 public class MqttConfig {
     private String clientEndpoint;
     private String clientId;

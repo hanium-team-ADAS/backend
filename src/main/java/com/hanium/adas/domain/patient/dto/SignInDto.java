@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PatientSignInDto {
+public class SignInDto {
     @NotNull
     private String email;
 

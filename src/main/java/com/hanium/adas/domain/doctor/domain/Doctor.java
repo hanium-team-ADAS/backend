@@ -5,11 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 기본 생성자는 접근 수준을 protected로
+@AllArgsConstructor // 모든 필드를 인자로 받는 생성자
 public class Doctor extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

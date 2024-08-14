@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DoctorDetailDto {
-    private Long id;            // 의사의 고유 ID
-    private String name;              // 의사 이름
-    private String specialization;    // 전문 분야
+public class AppointmentRequestDto {
+    private Long doctorId;
+    private String date;
+    private String time;
+    private String symptoms;
 }

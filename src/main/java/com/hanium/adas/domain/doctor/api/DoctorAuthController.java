@@ -3,6 +3,7 @@ import com.hanium.adas.domain.doctor.application.DoctorAuthService;
 import com.hanium.adas.domain.doctor.dto.DoctorSignInDto;
 import com.hanium.adas.domain.doctor.dto.DoctorSignUpDto;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,21 @@ public class DoctorAuthController {
     @Operation(summary = "🟡")
     @PostMapping("/sign-in")
     public ResponseEntity<Boolean> signIn(@RequestBody DoctorSignInDto signInDto, HttpServletResponse response) {
-        return ResponseEntity.ok(doctorAuthService.signIn(signInDto));
+        Long id = doctorAuthService.signIn(signInDto);
+
+        Cookie cookieForRole = new Cookie("role", "D"); // 의사는 D, 환자는 P
+        Cookie cookieForId = new Cookie("id", id.toString());
+
+        cookieForRole.setPath("/");
+        cookieForId.setPath("/");
+
+        cookieForRole.setMaxAge(3 * 60 * 60);
+        cookieForId.setMaxAge(3 * 60 * 60);
+
+        response.addCookie(cookieForRole);
+        response.addCookie(cookieForId);
+
+        return ResponseEntity.ok(true);
     }
 
     @Operation(summary = "🔺")

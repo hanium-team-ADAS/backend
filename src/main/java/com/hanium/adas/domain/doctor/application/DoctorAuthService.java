@@ -24,12 +24,13 @@ public class DoctorAuthService {
     public Long signIn(DoctorSignInDto dto) {
         Optional<Doctor> doctor = doctorRepository.findAllByEmail(dto.getEmail());
 
-        if(doctor.isEmpty() || !doctor.get().getPassword().equals(dto.getPassword())) {
+        if (doctor.isEmpty() || !doctor.get().getPassword().equals(dto.getPassword())) {
             throw new CustomException(INVALID_MEMBER);
         } else {
             return doctor.get().getId();
         }
 
+    }
 
     public boolean signUp(DoctorSignUpDto dto) {
         // 이메일 중복 확인

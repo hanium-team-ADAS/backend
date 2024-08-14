@@ -1,7 +1,7 @@
 package com.hanium.adas.domain.doctor.api;
-import com.hanium.adas.domain.doctor.application.AuthService;
-import com.hanium.adas.domain.doctor.dto.SignInDto;
-import com.hanium.adas.domain.doctor.dto.SignUpDto;
+import com.hanium.adas.domain.doctor.application.DoctorAuthService;
+import com.hanium.adas.domain.doctor.dto.DoctorSignInDto;
+import com.hanium.adas.domain.doctor.dto.DoctorSignUpDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;

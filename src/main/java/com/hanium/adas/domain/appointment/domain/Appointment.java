@@ -29,4 +29,6 @@ public class Appointment extends BaseTimeEntity {
     private String symptoms; //증상
     private Boolean deleted = false;  // 삭제 여부
 
+    private String symptom;
+
 }

@@ -2,6 +2,7 @@ package com.hanium.adas.domain.appointment.api;
 
 import com.hanium.adas.domain.appointment.application.AppointmentService;
 import com.hanium.adas.domain.appointment.dto.AppointmentRequestDto;
+import com.hanium.adas.domain.appointment.dto.AppointmentsDto;
 import com.hanium.adas.domain.appointment.dto.DoctorDetailDto;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,12 @@ public class AppointmentController {
     public ResponseEntity<Boolean> createAppointment(@RequestBody AppointmentRequestDto appointmentRequestDto, @RequestParam Long patientId) {
         boolean isCreated = appointmentService.createAppointment(appointmentRequestDto, patientId);
         return ResponseEntity.ok(isCreated);
+    }
+
+    @Operation(summary = "🟡")
+    @GetMapping("/patient/{patientId}")
+    public List<AppointmentsDto> getAppointmentsByPatientId(@PathVariable Long patientId) {
+        return appointmentService.getAppointmentsByPatientId(patientId);
     }
 
 }

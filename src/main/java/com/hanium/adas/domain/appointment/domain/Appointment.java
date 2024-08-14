@@ -7,8 +7,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
+
 @Builder
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 기본 생성자는 접근 수준을 protected로
 @AllArgsConstructor
 public class Appointment extends BaseTimeEntity {

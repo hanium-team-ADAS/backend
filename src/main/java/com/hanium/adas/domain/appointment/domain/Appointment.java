@@ -22,4 +22,6 @@ public class Appointment extends BaseTimeEntity {
     private String time;
     private String bodyTemperature;
 
+    private String symptom;
+
 }

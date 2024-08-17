@@ -16,4 +16,5 @@ public class AppointmentsDto {
     private String time;
     private String symptoms;
     private DoctorDetailDto doctor;
+    private Boolean deleted;
 }

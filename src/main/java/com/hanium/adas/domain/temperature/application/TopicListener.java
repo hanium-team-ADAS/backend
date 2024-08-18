@@ -4,7 +4,6 @@ import com.amazonaws.services.iot.client.AWSIotMessage;
 import com.amazonaws.services.iot.client.AWSIotTopic;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hanium.adas.domain.temperature.dto.SensorDto;
-import com.hanium.adas.domain.temperature.dto.TemperatureAIModelDto;
 import com.hanium.adas.domain.temperature.dto.TemperatureResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.client.RestTemplate;

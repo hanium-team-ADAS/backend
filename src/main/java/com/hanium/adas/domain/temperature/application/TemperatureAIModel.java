@@ -21,7 +21,6 @@ public class TemperatureAIModel {
         // 나이값 등 추후 수정 필요
         TemperatureAIModelDto dto = new TemperatureAIModelDto(sensorDto.getSensor_data(), sensorDto.getFile_url(), 25, 0);
 
-
         HttpHeaders header = new HttpHeaders();
         HttpEntity<?> httpEntity = new HttpEntity<>(dto, header);
         final ResponseEntity<Integer> response = restTemplate.exchange(url, HttpMethod.POST, httpEntity, Integer.class);

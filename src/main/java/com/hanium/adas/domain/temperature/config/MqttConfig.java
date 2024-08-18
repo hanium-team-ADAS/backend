@@ -6,6 +6,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
+
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "aws.iot")
@@ -17,9 +20,11 @@ public class MqttConfig {
 
     @Bean
     public AWSIotMqttClient mqttClient() {
-        AWSIotMqttClient mqttClient = new AWSIotMqttClient(clientEndpoint, clientId, accessKeyId, secretAccessKey);
+        // CLient ID 동적 생성
+        AWSIotMqttClient mqttClient = new AWSIotMqttClient(clientEndpoint, clientId  + new BigInteger(64, new SecureRandom()).toString(32), accessKeyId, secretAccessKey);
         mqttClient.setConnectionTimeout(30);
         mqttClient.setServerAckTimeout(10);
+        mqttClient.setKeepAliveInterval(0);
         return mqttClient;
     }
 }

@@ -1,10 +1,10 @@
 package com.hanium.adas.domain.appointment.application;
 
 import com.hanium.adas.domain.appointment.domain.Appointment;
-import com.hanium.adas.domain.appointment.dto.AppointmentCancellationDto;
+import com.hanium.adas.domain.appointment.dto.AppointmentPatientCancellationDto;
 import com.hanium.adas.domain.appointment.dto.AppointmentsDto;
 import com.hanium.adas.domain.appointment.dto.DoctorDetailDto;
-import com.hanium.adas.domain.appointment.dto.AppointmentRequestDto;
+import com.hanium.adas.domain.appointment.dto.AppointmentPatientRequestDto;
 
 import com.hanium.adas.domain.doctor.domain.Doctor;
 import com.hanium.adas.domain.patient.domain.Patient;
@@ -43,7 +43,7 @@ public class AppointmentService {
     }
 
 
-    public boolean createAppointment(AppointmentRequestDto appointmentRequestDto, Long patientId) {
+    public boolean createAppointment(AppointmentPatientRequestDto appointmentRequestDto, Long patientId) {
         Optional<Doctor> doctor = doctorRepository.findById(appointmentRequestDto.getDoctorId());
         Optional<Patient> patient = patientRepository.findById(patientId);
 
@@ -64,6 +64,7 @@ public class AppointmentService {
                 .time(appointmentRequestDto.getTime())
                 .symptoms(appointmentRequestDto.getSymptoms())
                 .deleted(false)
+                .status(0)
                 .build();
 
         appointmentRepository.save(appointment);
@@ -80,6 +81,7 @@ public class AppointmentService {
                         .time(appointment.getTime())
                         .symptoms(appointment.getSymptoms())
                         .deleted(appointment.getDeleted())
+                        .status(appointment.getStatus())
                         .doctor(DoctorDetailDto.builder()
                                 .id(appointment.getDoctor().getId())
                                 .name(appointment.getDoctor().getName())
@@ -89,7 +91,7 @@ public class AppointmentService {
                 .collect(Collectors.toList());
     }
 
-    public boolean cancelAppointment(AppointmentCancellationDto appointmentCancellationDto) {
+    public boolean cancelAppointment(AppointmentPatientCancellationDto appointmentCancellationDto) {
         Optional<Appointment> appointmentOpt = appointmentRepository.findById(appointmentCancellationDto.getId());
         if (appointmentOpt.isEmpty()) {
             return false;

@@ -1,8 +1,8 @@
 package com.hanium.adas.domain.appointment.api;
 
 import com.hanium.adas.domain.appointment.application.AppointmentService;
-import com.hanium.adas.domain.appointment.dto.AppointmentCancellationDto;
-import com.hanium.adas.domain.appointment.dto.AppointmentRequestDto;
+import com.hanium.adas.domain.appointment.dto.AppointmentPatientCancellationDto;
+import com.hanium.adas.domain.appointment.dto.AppointmentPatientRequestDto;
 import com.hanium.adas.domain.appointment.dto.AppointmentsDto;
 import com.hanium.adas.domain.appointment.dto.DoctorDetailDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +28,7 @@ public class AppointmentController {
 
     @Operation(summary = "🟡")
     @PostMapping("/create")
-    public ResponseEntity<Boolean> createAppointment(@RequestBody AppointmentRequestDto appointmentRequestDto, @RequestParam Long patientId) {
+    public ResponseEntity<Boolean> createAppointment(@RequestBody AppointmentPatientRequestDto appointmentRequestDto, @RequestParam Long patientId) {
         boolean isCreated = appointmentService.createAppointment(appointmentRequestDto, patientId);
         return ResponseEntity.ok(isCreated);
     }
@@ -41,7 +41,7 @@ public class AppointmentController {
 
     @Operation(summary = "🟡")
     @PostMapping("/cancel")
-    public ResponseEntity<Boolean> cancelAppointment(@RequestBody AppointmentCancellationDto appointmentCancellationDto) {
+    public ResponseEntity<Boolean> cancelAppointment(@RequestBody AppointmentPatientCancellationDto appointmentCancellationDto) {
         boolean isCancelled = appointmentService.cancelAppointment(appointmentCancellationDto);
         return ResponseEntity.ok(isCancelled);
     }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AppointmentRequestDto {
+public class AppointmentPatientRequestDto {
     private Long doctorId;
     private String date;
     private String time;

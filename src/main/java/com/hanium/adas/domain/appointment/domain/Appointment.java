@@ -31,6 +31,8 @@ public class Appointment extends BaseTimeEntity {
 
     private String symptom;
 
+    private int status; //0 예약요청  1 진료승인  2 진료거절
+
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }

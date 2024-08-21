@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AppointmentsDto {
+public class PatientAppointmentsDto {
     private Long id;
     private Long patientId;
     private String date;
     private String time;
     private String symptoms;
     private DoctorDetailDto doctor;
-    private Boolean deleted;
+    private Boolean isDeleted;
     private int status;
 }

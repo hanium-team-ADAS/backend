@@ -39,7 +39,7 @@ public class DoctorAuthController {
         return ResponseEntity.ok(true);
     }
 
-    @Operation(summary = "🔺")
+    @Operation(summary = "🟡")
     @PostMapping("/sign-up")
     public ResponseEntity<Boolean> signUp(@RequestBody DoctorSignUpDto doctorSignUpDto, HttpServletResponse response) {
         return ResponseEntity.ok(authService.signUp(doctorSignUpDto));

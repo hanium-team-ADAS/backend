@@ -1,6 +1,7 @@
 package com.hanium.adas.domain.appointment.application;
 
 import com.hanium.adas.domain.appointment.domain.Appointment;
+import com.hanium.adas.domain.appointment.dto.AppointmentCancellationDto;
 import com.hanium.adas.domain.appointment.dto.AppointmentsDto;
 import com.hanium.adas.domain.appointment.dto.DoctorDetailDto;
 import com.hanium.adas.domain.appointment.dto.AppointmentRequestDto;
@@ -78,6 +79,7 @@ public class AppointmentService {
                         .date(appointment.getDate())
                         .time(appointment.getTime())
                         .symptoms(appointment.getSymptoms())
+                        .deleted(appointment.getDeleted())
                         .doctor(DoctorDetailDto.builder()
                                 .id(appointment.getDoctor().getId())
                                 .name(appointment.getDoctor().getName())
@@ -87,4 +89,15 @@ public class AppointmentService {
                 .collect(Collectors.toList());
     }
 
+    public boolean cancelAppointment(AppointmentCancellationDto appointmentCancellationDto) {
+        Optional<Appointment> appointmentOpt = appointmentRepository.findById(appointmentCancellationDto.getId());
+        if (appointmentOpt.isEmpty()) {
+            return false;
+        }
+
+        Appointment appointment = appointmentOpt.get();
+        appointment.setDeleted(true); // 예약을 취소 상태로 변경
+        appointmentRepository.save(appointment);
+        return true;
+    }
 }

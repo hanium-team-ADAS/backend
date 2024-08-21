@@ -1,6 +1,7 @@
 package com.hanium.adas.domain.appointment.api;
 
 import com.hanium.adas.domain.appointment.application.AppointmentService;
+import com.hanium.adas.domain.appointment.dto.AppointmentCancellationDto;
 import com.hanium.adas.domain.appointment.dto.AppointmentRequestDto;
 import com.hanium.adas.domain.appointment.dto.AppointmentsDto;
 import com.hanium.adas.domain.appointment.dto.DoctorDetailDto;
@@ -38,4 +39,10 @@ public class AppointmentController {
         return appointmentService.getAppointmentsByPatientId(patientId);
     }
 
+    @Operation(summary = "🟡")
+    @PostMapping("/cancel")
+    public ResponseEntity<Boolean> cancelAppointment(@RequestBody AppointmentCancellationDto appointmentCancellationDto) {
+        boolean isCancelled = appointmentService.cancelAppointment(appointmentCancellationDto);
+        return ResponseEntity.ok(isCancelled);
+    }
 }

@@ -4,7 +4,6 @@ import com.hanium.adas.domain.doctor.domain.Doctor;
 import com.hanium.adas.domain.doctor.dto.DoctorSignInDto;
 import com.hanium.adas.domain.doctor.dto.DoctorSignUpDto;
 import com.hanium.adas.domain.doctor.repository.DoctorRepository;
-import com.hanium.adas.domain.doctor.repository.DoctorRepository;
 import com.hanium.adas.global.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

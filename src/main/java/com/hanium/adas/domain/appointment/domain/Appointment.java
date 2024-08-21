@@ -31,4 +31,7 @@ public class Appointment extends BaseTimeEntity {
 
     private String symptom;
 
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }

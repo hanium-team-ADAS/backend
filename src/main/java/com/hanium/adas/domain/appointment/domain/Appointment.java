@@ -27,11 +27,14 @@ public class Appointment extends BaseTimeEntity {
     private String date; //진료일자
     private String time; //진료시간
     private String symptoms; //증상
-    private Boolean deleted = false;  // 삭제 여부
+    private Boolean isDeleted = false;  // 환자기준 삭제 여부
 
     private String symptom;
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+    @Setter
+    private int status; //의사기준 0 예약요청  1 진료승인  2 진료거절
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

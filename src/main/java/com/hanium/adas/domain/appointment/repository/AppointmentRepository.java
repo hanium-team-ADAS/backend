@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
-    // 환자의 ID를 기준으로 예약 내역 조회
     List<Appointment> findByPatientId(Long patientId);
+    List<Appointment> findByDoctorId(Long doctorId);
 }

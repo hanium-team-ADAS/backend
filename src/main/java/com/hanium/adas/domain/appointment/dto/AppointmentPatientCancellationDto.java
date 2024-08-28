@@ -5,14 +5,14 @@ import lombok.Data;
 
 @Data
 @Builder
-public class AppointmentCancellationDto {
+public class AppointmentPatientCancellationDto {
     private Long id;
 
     // 기본 생성자
-    public AppointmentCancellationDto() {}
+    public AppointmentPatientCancellationDto() {}
 
     // 모든 필드를 포함하는 생성자
-    public AppointmentCancellationDto(Long id) {
+    public AppointmentPatientCancellationDto(Long id) {
         this.id = id;
     }
 }

@@ -1,10 +1,7 @@
 package com.hanium.adas.domain.appointment.application;
 
 import com.hanium.adas.domain.appointment.domain.Appointment;
-import com.hanium.adas.domain.appointment.dto.AppointmentCancellationDto;
-import com.hanium.adas.domain.appointment.dto.AppointmentsDto;
-import com.hanium.adas.domain.appointment.dto.DoctorDetailDto;
-import com.hanium.adas.domain.appointment.dto.AppointmentRequestDto;
+import com.hanium.adas.domain.appointment.dto.*;
 
 import com.hanium.adas.domain.doctor.domain.Doctor;
 import com.hanium.adas.domain.patient.domain.Patient;
@@ -43,9 +40,7 @@ public class AppointmentService {
     }
 
 
-    public boolean createAppointment(AppointmentRequestDto appointmentRequestDto, Long patientId) {
-        Optional<Doctor> doctor = doctorRepository.findById(appointmentRequestDto.getDoctorId());
-        Optional<Patient> patient = patientRepository.findById(patientId);
+    public boolean createAppointment(AppointmentPatientRequestDto appointmentRequestDto, Long patientId) {
 
         Optional<Patient> patientOpt = patientRepository.findById(patientId);
         if (patientOpt.isEmpty()) {
@@ -63,23 +58,25 @@ public class AppointmentService {
                 .date(appointmentRequestDto.getDate())
                 .time(appointmentRequestDto.getTime())
                 .symptoms(appointmentRequestDto.getSymptoms())
-                .deleted(false)
+                .isDeleted(false)
+                .status(0)
                 .build();
 
         appointmentRepository.save(appointment);
         return true;
     }
 
-    public List<AppointmentsDto> getAppointmentsByPatientId(Long patientId) {
+    public List<PatientAppointmentsDto> getAppointmentsByPatientId(Long patientId) {
         List<Appointment> appointments = appointmentRepository.findByPatientId(patientId);
         return appointments.stream()
-                .map(appointment -> AppointmentsDto.builder()
+                .map(appointment -> PatientAppointmentsDto.builder()
                         .id(appointment.getId())
                         .patientId(appointment.getPatient().getId())
                         .date(appointment.getDate())
                         .time(appointment.getTime())
                         .symptoms(appointment.getSymptoms())
-                        .deleted(appointment.getDeleted())
+                        .isDeleted(appointment.getIsDeleted())
+                        .status(appointment.getStatus())
                         .doctor(DoctorDetailDto.builder()
                                 .id(appointment.getDoctor().getId())
                                 .name(appointment.getDoctor().getName())
@@ -89,15 +86,45 @@ public class AppointmentService {
                 .collect(Collectors.toList());
     }
 
-    public boolean cancelAppointment(AppointmentCancellationDto appointmentCancellationDto) {
+    public boolean cancelAppointment(AppointmentPatientCancellationDto appointmentCancellationDto) {
         Optional<Appointment> appointmentOpt = appointmentRepository.findById(appointmentCancellationDto.getId());
         if (appointmentOpt.isEmpty()) {
             return false;
         }
 
         Appointment appointment = appointmentOpt.get();
-        appointment.setDeleted(true); // 예약을 취소 상태로 변경
+        appointment.setIsDeleted(true); // 예약을 취소 상태로 변경
         appointmentRepository.save(appointment);
         return true;
+    }
+
+    public boolean doctorUpdateAppointmentStatus(Long appointmentId, int status) {
+        Optional<Appointment> appointmentOpt = appointmentRepository.findById(appointmentId);
+
+        if (appointmentOpt.isEmpty() || appointmentOpt.get().getIsDeleted()) {
+            return false; // 진료가 존재하지 않거나 deleted가 true인 경우
+        }
+
+        Appointment appointment = appointmentOpt.get();
+        appointment.setStatus(status);
+        appointmentRepository.save(appointment);
+
+        return true;
+    }
+
+    public List<DoctorAppointmentsDto> getAppointmentsByDoctorId(Long doctorId) {
+        List<Appointment> appointments = appointmentRepository.findByDoctorId(doctorId);
+        return appointments.stream()
+                .map(appointment -> DoctorAppointmentsDto.builder()
+                        .appointmentId(appointment.getId())
+                        .patientId(appointment.getPatient().getId())
+                        .patientName(appointment.getPatient().getName())
+                        .date(appointment.getDate())
+                        .time(appointment.getTime())
+                        .symptoms(appointment.getSymptoms())
+                        .status(appointment.getStatus())
+                        .isDeleted(appointment.getIsDeleted())
+                        .build())
+                .collect(Collectors.toList());
     }
 }

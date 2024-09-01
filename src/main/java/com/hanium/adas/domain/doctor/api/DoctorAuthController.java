@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/doctor")
 public class DoctorAuthController {
 
-    private final DoctorAuthService authService;
+    private final DoctorAuthService doctorauthService;
 
     @Operation(summary = "🟡")
     @PostMapping("/sign-in")
-    public ResponseEntity<Boolean> signIn(@RequestBody DoctorSignInDto signInDto, HttpServletResponse response) {
-        Long id = authService.signIn(signInDto);
+    public ResponseEntity<Boolean> signIn(@RequestBody DoctorSignInDto doctorsignInDto, HttpServletResponse response) {
+        Long id = doctorauthService.signIn(doctorsignInDto);
 
         Cookie cookieForRole = new Cookie("role", "D"); // 의사는 D, 환자는 P
         Cookie cookieForId = new Cookie("id", id.toString());
@@ -42,7 +42,7 @@ public class DoctorAuthController {
     @Operation(summary = "🟡")
     @PostMapping("/sign-up")
     public ResponseEntity<Boolean> signUp(@RequestBody DoctorSignUpDto doctorSignUpDto, HttpServletResponse response) {
-        return ResponseEntity.ok(authService.signUp(doctorSignUpDto));
+        return ResponseEntity.ok(doctorauthService.signUp(doctorSignUpDto));
     }
 }
 

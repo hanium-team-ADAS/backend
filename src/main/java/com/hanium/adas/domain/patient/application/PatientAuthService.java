@@ -4,25 +4,32 @@ import com.hanium.adas.domain.patient.domain.Patient;
 import com.hanium.adas.domain.patient.dto.PatientSignInDto;
 import com.hanium.adas.domain.patient.dto.PatientSignUpDto;
 import com.hanium.adas.domain.patient.repository.PatientRepository;
+import com.hanium.adas.global.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.hanium.adas.global.exception.ErrorCode.INVALID_MEMBER;
+
 @Slf4j
-@Service("patientAuthService") // 빈 이름을 명시적으로 지정
+@Service
 @RequiredArgsConstructor
 public class PatientAuthService {
 
     private final PatientRepository patientRepository;
 
-    public boolean signIn(PatientSignInDto dto) {
-
+    public Long signIn(PatientSignInDto dto) {
         Optional<Patient> patient = patientRepository.findAllByEmail(dto.getEmail());
 
-        return patient.isPresent() && patient.get().getPassword().equals(dto.getPassword());
+        if (patient.isEmpty() || !patient.get().getPassword().equals(dto.getPassword())) {
+            throw new CustomException(INVALID_MEMBER);
+        } else {
+            return patient.get().getId();
+        }
     }
+
 
     public boolean signUp(PatientSignUpDto dto) {
         // 이메일 중복 확인

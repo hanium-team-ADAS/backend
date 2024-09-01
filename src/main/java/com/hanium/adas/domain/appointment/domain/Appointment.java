@@ -29,7 +29,6 @@ public class Appointment extends BaseTimeEntity {
     private String symptoms; //증상
     private Boolean isDeleted = false;  // 환자기준 삭제 여부
 
-    private String symptom;
 
     @Setter
     private int status; //의사기준 0 예약요청  1 진료승인  2 진료거절
